@@ -48,6 +48,28 @@ exports.show = function (req, res, next) {
 };
 
 /**
+ * Uodate user profile
+ */
+exports.updateProfile = function(req, res) {
+  var userId = req.user._id;
+
+  var newName = String(req.body.user.name);
+  var newCity = String(req.body.user.city);
+  var newState = String(req.body.user.state);
+
+  User.findById(userId, function (err, user) {
+    if(!user) { return res.status(404).send('Not Found'); }
+      user.name = newName;
+      user.city = newCity;
+      user.state = newState;
+      user.save(function(err) {
+        if (err) return res.status(404).send('Fail user update');;
+        res.status(200).send('OK');
+    });
+  });
+};
+
+/**
  * Deletes a user
  * restriction: 'admin'
  */
@@ -74,7 +96,7 @@ exports.changePassword = function(req, res, next) {
         res.status(200).send('OK');
       });
     } else {
-      res.status(403).send('Forbidden');
+      if (!user) return res.status(401).send('No content');
     }
   });
 };

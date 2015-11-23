@@ -3,18 +3,70 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
+      <h1>Update profile</h1>
+    </div>
+    <div class="col-sm-12">
+      <form class="form" name="updateProfileForm" ng-submit="updateProfile(updateProfileForm)" novalidate>
+
+              <div class="form-group" ng-class="{ 'has-success': updateProfileForm.name.$valid,
+                                            'has-error': updateProfileForm.name.$invalid }">
+          <label>Name</label>
+
+          <input type="text" name="name" class="form-control" ng-model="user.name"
+                 required/>
+          <p class="help-block" ng-show="updateProfileForm.name.$error.required">
+            A name is required
+          </p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': updateProfileForm.city.$valid,
+                                            'has-error': updateProfileForm.city.$invalid }">
+          <label>City</label>
+
+          <input type="text" name="city" class="form-control" ng-model="user.city"
+                 required/>
+          <p class="help-block" ng-show="updateProfileForm.city.$error.required">
+            A city is required
+          </p>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-success': updateProfileForm.state.$valid,
+                                            'has-error': updateProfileForm.state.$invalid }">
+          <label>State</label>
+
+          <input type="text" name="state" class="form-control" ng-model="user.state"
+                 ng-minlength="2"
+                 ng-maxlength="2"
+                 required/>
+          <p class="help-block" ng-show="updateProfileForm.state.$error.minlength || updateProfileForm.state.$error.maxlength || updateProfileForm.state.$error.required">
+            A state must be 2 characters
+          </p>
+        </div>
+
+        <div>
+          <p class="help-block"> {{ messageUpdateProfile }} </p>
+
+          <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="col-sm-12">
       <h1>Change Password</h1>
     </div>
     <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+      <form class="form" name="changePasswordForm" ng-submit="changePassword(changePasswordForm)" novalidate>
 
         <div class="form-group">
           <label>Current Password</label>
 
           <input type="password" name="password" class="form-control" ng-model="user.oldPassword"
                  mongoose-error/>
-          <p class="help-block" ng-show="form.password.$error.mongoose">
-              {{ errors.other }}
+          <p class="help-block" ng-show="changePasswordForm.password.$error.mongoose">
+              {{ errors.otherChangePassword }}
           </p>
         </div>
 
@@ -25,12 +77,12 @@
                  ng-minlength="3"
                  required/>
           <p class="help-block"
-             ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
+             ng-show="(changePasswordForm.newPassword.$error.minlength || changePasswordForm.newPassword.$error.required) && (changePasswordForm.newPassword.$dirty || submittedChangePassword)">
             Password must be at least 3 characters.
           </p>
         </div>
 
-        <p class="help-block"> {{ message }} </p>
+        <p class="help-block"> {{ messageChangePassword }} </p>
 
         <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
       </form>
