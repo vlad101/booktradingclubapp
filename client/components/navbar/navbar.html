@@ -20,6 +20,9 @@
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/myBooks')}">
             <a ng-href="/myBooks">My Books</a>
         </li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/requests')}">
+            <a ng-href="/requests">Requests</a>
+        </li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
       </ul>
 
