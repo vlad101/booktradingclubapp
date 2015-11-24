@@ -7,17 +7,42 @@
  	<div class="row">
 	    <div class="col-lg-12">
 	      <h1 class="page-header">My Books<h1>
+
+	         <!-- Add book input form -->
+	        <br><h4>Add Book</h4>
+	        <form role="form" ng-submit="addBook()">
+	          <div class="row">
+	            <div class="input-group">
+	              <input type="text" name="book" ng-model="addBookForm.bookGoogleId" placeholder="Google Book ID (Ex: a2LkBgAAQBAJ)" class="form-control" required>
+	              <span class="input-group-btn">
+	                <input type="submit" class="btn btn-primary" value="Add">
+	              </span>
+	            </div>
+	          </div>
+	          <p>{{ addBookMessage }}</p>
+	        </form>
+	        <br><br>
+
+		    <!-- Trade book message response -->
+		    <div ng-show="deleteBookMessage"><h4>{{ deleteBookMessage }}</h4></div>
 	      
 		    <!-- Display all books -->
 	    	<div id="book-list">
 		      	<ul ng-repeat="book in bookList">
+
 		      		<!-- Show books of the current user -->
 		      		<li ng-show="book.userId == getCurrentUser()._id">
-		    			<img ng-src="http://books.google.com/books/content?id= {{ book.googleId }} &amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
-		    			<!-- <button type="button" class="close" ng-click="deleteBook(book)">×</button> -->
+		      			<div id="img_container">
+
+		      				<!-- Google book image uses google book API -->
+			    			<img ng-src="http://books.google.com/books/content?id= {{ book.googleId }} &amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+
+			    			<!-- Delete book button -->
+			    			<a class="img_button" ng-click="deleteBook(book._id)"><i class="fa fa-times"></i></a>
+
+			    		</div>
 		    		</li>
-		    	</ul>
-		    	<div ng-show="bookList.length == 0" id="book-list-empty"><h3>No books added, add a book.</h3></div>
+		    	</ul>	
 	    	</div>
       </div>
   </div>

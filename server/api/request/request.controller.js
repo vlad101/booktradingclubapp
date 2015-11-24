@@ -22,7 +22,8 @@ exports.show = function(req, res) {
 
 // Creates a new request in the DB.
 exports.create = function(req, res) {
-  Request.create(req.body, function(err, request) {
+  if(!req.body.request) { return handleError(res, err); }
+  Request.create(req.body.request, function(err, request) {
     if(err) { return handleError(res, err); }
     return res.status(201).json(request);
   });

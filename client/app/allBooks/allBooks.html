@@ -9,13 +9,23 @@
 	      <h1 class="page-header">All Books<h1>
 	      
 		    <!-- Display all books -->
-		    <h3>Click the <i class="fa fa-retweet"></i> to request a trade!</h3><br>
+		    <h3>Click the <i class="fa fa-retweet"></i> to request a trade!</h3>
+
+		    <!-- Trade book message response -->
+		    <div ng-show="tradeBookMessage"><br><h4>{{ tradeBookMessage }}</h4></div>
+
 	    	<div id="book-list">
 		      	<ul ng-repeat="book in bookList">
 		      		<li>
-		    			<img ng-src="http://books.google.com/books/content?id= {{ book.googleId }} &amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
-		    			<!-- <button type="button" class="close" ng-click="deleteBook(book)">×</button> -->
-		    			&nbsp;
+		      			<div id="img_container">
+
+		      				<!-- Google book image uses google book API -->
+			    			<img ng-src="http://books.google.com/books/content?id= {{ book.googleId }} &amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+
+			    			<!-- Trade book button -->
+			    			<a class="img_button" ng-click="tradeBook(book._id)"><i class="fa fa-retweet"></i></a>
+
+			    		</div>
 		    		</li>
 		    	</ul>
 		    	<div ng-show="bookList.length == 0" id="book-list-empty">No books added.</div>

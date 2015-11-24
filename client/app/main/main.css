@@ -45,6 +45,37 @@
 }
 
 /*
+    Image containter
+*/
+ul li #img_container {
+    position: relative;
+    text-align: center;
+}
+
+/*
+    Button inside image container
+*/
+ul li .img_button {
+    text-align: center;
+    background: white;
+    color: red;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 17px;
+    height: 17px;
+    border-radius: 5px;
+}
+
+/*
+    Button inside image on mouse over event
+*/
+ul li .img_button:hover {
+    cursor: pointer;
+    background: #cccccc;
+}
+
+/*
     Display book covers inline
 */
 #book-list li {

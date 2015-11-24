@@ -22,7 +22,8 @@ exports.show = function(req, res) {
 
 // Creates a new book in the DB.
 exports.create = function(req, res) {
-  Book.create(req.body, function(err, book) {
+  if(!req.body.book) { return handleError(res, err); }
+  Book.create(req.body.book, function(err, book) {
     if(err) { return handleError(res, err); }
     return res.status(201).json(book);
   });

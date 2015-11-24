@@ -16,4 +16,25 @@ angular.module('workspaceApp')
     }).catch( function() {
       $scope.bookList = '';
     });
+
+    // Trade button click event
+    $scope.tradeBook = function(bookId){
+
+      $scope.tradeBookMessage = '';
+
+      var request = {
+        bookId: bookId,
+        userId: $scope.getCurrentUser()._id,
+        approved: false 
+      };
+
+      $http.post('/api/requests', {request:request})
+        .then(function successCallback(response) {
+            $scope.tradeBookMessage = "The trade request is placed.";
+          }, function errorCallback(response) {
+            $scope.tradeBookMessage = 'Something went wrong, try again.';
+      }).catch( function() {
+        $scope.tradeBookMessage = '';
+      });
+    }
   });
