@@ -57,9 +57,7 @@
 /*
     Zoom book cover on mouse over
 */
-li:hover {
-    background: #F0F8FF;
-
+#book-list li:hover {
     /*Zoom*/
     -webkit-transform:scale(1.05); /* Safari and Chrome */
     -moz-transform:scale(1.05); /* Firefox */

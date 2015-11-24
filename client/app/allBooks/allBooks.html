@@ -13,13 +13,12 @@
 	    	<div id="book-list">
 		      	<ul ng-repeat="book in bookList">
 		      		<li>
-		    			<a>
 		    			<img ng-src="http://books.google.com/books/content?id= {{ book.googleId }} &amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
 		    			<!-- <button type="button" class="close" ng-click="deleteBook(book)">×</button> -->
-		    			</a>
 		    			&nbsp;
 		    		</li>
 		    	</ul>
+		    	<div ng-show="bookList.length == 0" id="book-list-empty">No books added.</div>
 	    	</div>
       </div>
   </div>
