@@ -51,8 +51,10 @@ exports.show = function (req, res, next) {
  * Uodate user profile
  */
 exports.updateProfile = function(req, res) {
-  var userId = req.user._id;
 
+  if (!req.body.user) return res.status(404).send('Fail getting user data');;
+
+  var userId = String(req.body.user._id);
   var newName = String(req.body.user.name);
   var newCity = String(req.body.user.city);
   var newState = String(req.body.user.state);

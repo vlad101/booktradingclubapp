@@ -32,3 +32,38 @@
 .navbar-text {
     margin-left: 15px;
 }
+
+/*
+    Show border and round corner on book cover
+*/
+#book-list img {
+    border: 1px solid black;
+    width: ;
+    width: 128px;
+    height: 196px;
+    border-radius: 5px;
+}
+
+/*
+    Display book covers inline
+*/
+#book-list li {
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 5px;
+}
+
+/*
+    Zoom book cover on mouse over
+*/
+li:hover {
+    background: #F0F8FF;
+
+    /*Zoom*/
+    -webkit-transform:scale(1.05); /* Safari and Chrome */
+    -moz-transform:scale(1.05); /* Firefox */
+    -ms-transform:scale(1.05); /* IE 9 */
+    -o-transform:scale(1.05); /* Opera */
+     transform:scale(1.05);
+}

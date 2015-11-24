@@ -1,8 +1,34 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div ng-include="'components/main/header.html'"></div>
 
-<div class="container">
- 	<h1 class="page-header">All Books<h1>
+<!-- Authenticated user -->
+<div ng-show="isLoggedIn()" class="container">
+
+ 	<div class="row">
+	    <div class="col-lg-12">
+	      <h1 class="page-header">All Books<h1>
+	      
+		    <!-- Display all books -->
+		    <h3>Click the <i class="fa fa-retweet"></i> to request a trade!</h3><br>
+	    	<div id="book-list">
+		      	<ul ng-repeat="book in bookList">
+		      		<li>
+		    			<a>
+		    			<img ng-src="http://books.google.com/books/content?id= {{ book.googleId }} &amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+		    			<!-- <button type="button" class="close" ng-click="deleteBook(book)">×</button> -->
+		    			</a>
+		    			&nbsp;
+		    		</li>
+		    	</ul>
+	    	</div>
+      </div>
+  </div>
+</div>
+
+<!-- Not authenticated user -->
+<div ng-show="!isLoggedIn()" class="container">
+	<br>
+ 	<h2>Must login to view content.</h2>
 </div>
 
 <div ng-include="'components/main/footer.html'"></div>
