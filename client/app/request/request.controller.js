@@ -9,97 +9,61 @@ angular.module('workspaceApp')
 
 	// Hide trade requests
 	$scope.yourRequests = false;
-	$scope.requestsForYou = false;
+	$scope.requestsForYou = false;;
 
-    // Get outstanding trade requests that are not approved
-
-    // The list will contain book id requests that are approved
-    var approvedRequestList = [ ];
-
-    $http.get('/api/requests')
-      .then(function successCallback(bookList) {
-          $scope.tradeRequests = bookList.data;
-
-          // Get book details for each book in trade requests
-          $scope.tradeRequestsBooks = [ ];
-
-          // Get list of approved books id
-          $scope.yourTradeRequestsBooksApproved = [ ];
-
-          for(var i in $scope.tradeRequests) {
-            if($scope.tradeRequests[i].approved == 1)
-              $scope.yourTradeRequestsBooksApproved.push($scope.tradeRequests[i].bookId);
-            $http.get('/api/books/' + $scope.tradeRequests[i].bookId)
-              .then(function successCallback(bookList) {
-                  $scope.tradeRequestsBooks.push(bookList.data);
-                }, function errorCallback(response) {
-                  $scope.requestsMessage = 'Something went wrong, try again.';
-            }).catch( function() {
-              $scope.tradeRequestsMessage = '';
-            });
-          }
+    // Get book trade requests along with the book info
+    $http.get('/api/bookRequests')
+      .then(function successCallback(bookRequestList) {
+      	$scope.bookRequestList = bookRequestList.data;
+      	// Query example of dictionary
+      	// for(var i in $scope.bookRequestList ) {
+      	// 	console.log("Request ID -> " + i);
+      	// 	console.log("GoogleId -> " + $scope.bookRequestList[i].googleId);
+      	// }
         }, function errorCallback(response) {
-          $scope.tradeRequestsMessage = 'Something went wrong, try again.';
+          $scope.requestListMessage = 'Something went wrong, try again.';
     }).catch( function() {
-      $scope.tradeRequestsMessage = '';
+      $scope.requestListMessage = '';
     });
 
-    $scope.deleteRequest = function(bookId, approved){
+    // Get book trade requests that are not approved
+    $http.get('/api/requests')
+      .then(function successCallback(requestList) {
+      	$scope.requestList = requestList.data;
 
-      // GET position take care of three arrays
-      // var request = {
-      //   bookId: bookId,
-      //   userId: $scope.getCurrentUser()._id,
-      //   approved: approved
-      // };
+      	$scope.yourRequestList = [ ];
+      	for(var i in $scope.requestList) {
+      		if($scope.requestList[i].userId == $scope.getCurrentUser()._id)
+      			$scope.yourRequestList.push($scope.requestList[i])
+      	}
 
-      // console.log("deleteRequest from  -> " + $scope.yourTradeRequestsBooksApproved);
-      // console.log("deleteRequest from  -> " + $scope.tradeRequestsBooks);
+        }, function errorCallback(response) {
+          $scope.requestListMessage = 'Something went wrong, try again.';
+    }).catch( function() {
+      $scope.requestListMessage = '';
+    });
 
-      // var count = 0;
-      // for(var i in $scope.tradeRequestsBooks) {
-      //   if($scope.tradeRequestsBooks[i].bookId == request.bookId && 
-      //     $scope.tradeRequestsBooks[i].userId == request.userId && 
-      //     $scope.tradeRequestsBooks[i].approved == request.approved) {
-      //       $scope.tradeRequestsBooks.splice(i, 1);
+    $scope.deleteRequest = function(requestId){
 
-      //       for(var j in $scope.yourTradeRequestsBooksApproved) {
-      //         if($scope.yourTradeRequestsBooksApproved[j] == $scope.tradeRequestsBooks[i].bookId) {
-      //           $scope.yourTradeRequestsBooksApproved.splice(j, 1);
-      //           count++;
-      //         }
-
-      //       for(var j in $scope.yourTradeRequestsBooksApproved) {
-      //         if($scope.yourTradeRequestsBooksApproved[j] == $scope.tradeRequestsBooks[i].bookId) {
-      //           $scope.yourTradeRequestsBooksApproved.splice(j, 1);
-      //           count++;
-      //         }
-      //       if(count == 1)
-      //         break;
-      //     }
-      //   }
-      // }
-      // console.log("deleteRequest from  -> " + $scope.yourTradeRequestsBooksApproved);
-      // console.log("deleteRequest from  -> " + $scope.tradeRequestsBooks);
+    // Remove request from DB
+      $http.delete('/api/requests/' + requestId)
+        .then(function successCallback(response) {
+        	// Remove request from fromnt end
+	    	for(var i = 0; i < $scope.yourRequestList.length; i++) {
+	    		if($scope.yourRequestList[i]._id == requestId) {
+	    			$scope.yourRequestList.splice(i, 1);
+	    		}
+	    	}
+            $scope.deleteRequestMessage = "The trade request was deleted.";
+          }, function errorCallback(response) {
+            $scope.deleteRequestMessage = 'Something went wrong, try again.';
+      }).catch( function() {
+        $scope.deleteRequestMessage = '';
+      });
     }
-          
-      // }
 
-      // $http.detele('/api/requests', {request:request})
-      //   .then(function successCallback(response) {
-      //       $scope.deleteRequestMessage = "The trade request was deleted.";
-      //     }, function errorCallback(response) {
-      //       $scope.deleteRequestMessage = 'Something went wrong, try again.';
-      // }).catch( function() {
-      //   $scope.deleteRequestMessage = '';
-      // });
-    // }
-
-    /*
-     Choose requests type
-	*/
     
-    // Trade request type button click event
+    //Choose requests type
     $scope.chooseRequestType = function(actionId){
       	if(actionId == 1) {
       		// Show your trade requets
