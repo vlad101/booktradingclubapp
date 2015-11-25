@@ -35,10 +35,10 @@
 		      			<div id="img_container">
 
 		      				<!-- Google book image uses google book API -->
-			    			<img ng-src="http://books.google.com/books/content?id= {{ book.googleId }} &amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+			    			<img ng-src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
 
 			    			<!-- Delete book button -->
-			    			<a class="img_button" ng-click="deleteBook(book._id)"><i class="fa fa-times"></i></a>
+			    			<a class="img_button" ng-click="deleteBook(book._id)"><i class="fa fa-times mybooks" style="font-size:100%;"></i></a>
 
 			    		</div>
 		    		</li>

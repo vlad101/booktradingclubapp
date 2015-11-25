@@ -12,7 +12,10 @@ var RequestSchema = new Schema({
   		type: Schema.Types.ObjectId,
   		required: true
   },
-  approved: Boolean
+  approved: { 
+      type: Number,
+      required: true
+  }
 });
 
 module.exports = mongoose.model('Request', RequestSchema);

@@ -10,10 +10,10 @@
 	<div id="action-button-group">
 		<ul>
 			<li>
-				<button ng-click="chooseRequestType(1)" class="btn btn-success ng-binding">Your trade requests (# outstanding)</button>
+				<button ng-click="chooseRequestType(1)" class="btn btn-success active">Your trade requests</button>
 			</li>
 			<li>
-				<button ng-click="chooseRequestType(2)" class="btn btn-primary ng-binding">Trade requests for you (# unapproved)</button>
+				<button ng-click="chooseRequestType(2)" class="btn btn-primary active">Trade requests for you</button>
 			</li>
 		</ul>
 	</div>
@@ -23,28 +23,53 @@
 	    <div class="col-lg-12">
 
 	      	<h2>Your outstanding trade requests<h2>
-	      	<h2>Your trade request was approved<h2>
 
-		    <!-- Trade book message response -->
-		    <div ng-show="tradeBookMessage"><br><h4>{{ tradeBookMessage }}</h4></div>
+	      	<div ng-show="tradeRequestsMessage"><br><h4>{{ deleteRequestMessage }}</h4></div>
 
 	    	<div id="book-list">
-		      	<ul ng-repeat="book in bookList">
-		      		<li>
+		      	<ul ng-repeat="book in tradeRequestsBooks">
+		      		<!--  -->
+		      		<li ng-show="yourTradeRequestsBooksApproved.indexOf(book._id) == -1">
 		      			<div id="img_container">
 
 		      				<!-- Google book image uses google book API -->
-			    			<img ng-src="http://books.google.com/books/content?id= {{ book.googleId }} &amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+			    			<img ng-src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
 
 			    			<!-- Trade book button -->
-			    			<a class="img_button" ng-click="tradeBook(book._id)"><i class="fa fa-times"></i></a>
+			    			<a class="img_button" ng-click="deleteRequest(book._id, 0)"><i class="fa fa-times"></i></a>
 
 			    		</div>
 		    		</li>
 		    	</ul>
-		    	<div ng-show="bookList.length == 0" id="book-list-empty">No books added.</div>
+		    	<div ng-show="tradeRequestsBooks.length == 0" id="book-list-empty"><h4>No books requested.<br></h4></div>
 	    	</div>
-	      </div>
+	    </div>
+	    <br><br>
+
+	    <div class="col-lg-12">
+	      	<h2>Your trade request was approved<h2>
+
+
+	      	<div ng-show="tradeRequestsMessage"><br><h4>{{ deleteRequestMessage }}</h4></div>
+
+	    	<div id="book-list">
+		      	<ul ng-repeat="book in tradeRequestsBooks">
+		      		<!--  -->
+		      		<li ng-show="yourTradeRequestsBooksApproved.indexOf(book._id) != -1">
+		      			<div id="img_container">
+
+		      				<!-- Google book image uses google book API -->
+			    			<img ng-src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+
+			    			<!-- Trade book button -->
+			    			<a class="img_button" ng-click="deleteRequest(book._id, 1)"><i class="fa fa-times"></i></a>
+
+			    		</div>
+		    		</li>
+		    	</ul>
+		    	<div ng-show="tradeRequestsBooks.length == 0" id="book-list-empty"><h4>No books requested.<br></h4></div>
+	    	</div>
+	    </div>
   	</div>
 
  	<!-- Requests for the user -->
@@ -63,7 +88,7 @@
 		      			<div id="img_container">
 
 		      				<!-- Google book image uses google book API -->
-			    			<img ng-src="http://books.google.com/books/content?id= {{ book.googleId }} &amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+			    			<img ng-src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
 
 			    			<!-- Trade book button -->
 			    			<a class="img_button" ng-click="tradeBook(book._id)"><i class="fa fa-times"></i></a>

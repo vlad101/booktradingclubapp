@@ -14,7 +14,6 @@
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-      <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -30,6 +29,8 @@
       <link rel="stylesheet" href="components/modal/modal.css">
       <!-- endinjector -->
     <!-- endbuild -->
+    <!-- http://stackoverflow.com/questions/21862757/bower-or-grunt-keeps-removing-jquery-from-index-html -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
   </head>
   <body ng-app="workspaceApp">
     <!--[if lt IE 7]>

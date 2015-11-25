@@ -130,52 +130,52 @@ Request.find({}).remove(function() {
     _id: ObjectId("5653bcae9318d1da240a5743"),
     userId: ObjectId("5653a4efb2c7aa19102b5280"),
     bookId: ObjectId("5653b6219ad6087723fa1cbf"),
-    approved: true
+    approved: 1
   },{
     _id: ObjectId("5653bcae9318d1da240a5744"),
     userId: ObjectId("5653a4efb2c7aa19102b5280"),
     bookId: ObjectId("5653b6219ad6087723fa1cc0"),
-    approved: false
+    approved: 0
   },{
     _id: ObjectId("5653bcae9318d1da240a5745"),
     userId: ObjectId("5653a4efb2c7aa19102b5280"),
     bookId: ObjectId("5653b6219ad6087723fa1cc1"),
-    approved: true
+    approved: 1
   },{
     _id: ObjectId("5653bcae9318d1da240a5746"),
     bookId: ObjectId("5653b8d51a8178c223983966"),
     userId: ObjectId("5653a4efb2c7aa19102b5280"),
-    approved: false
+    approved: 0
   },{
     _id: ObjectId("5653bcae9318d1da240a5747"),
     bookId: ObjectId("5653b6219ad6087723fa1cc3"),
     userId: ObjectId("5653a4efb2c7aa19102b5280"),
-    approved: false
+    approved: 1
   },{
     _id: ObjectId("5653bcae9318d1da240a5748"),
     userId: ObjectId("5653a4efb2c7aa19102b5281"),
     bookId: ObjectId("5653b6219ad6087723fa1cc4"),    
-    approved: false
+    approved: 0
   },{
     _id: ObjectId("5653bcae9318d1da240a5749"),
     userId: ObjectId("5653a4efb2c7aa19102b5281"),
     bookId: ObjectId("5653b6219ad6087723fa1cc5"),
-    approved: true
+    approved: 1
   },{
     _id: ObjectId("5653bcae9318d1da240a574a"),
     userId: ObjectId("5653a4efb2c7aa19102b5281"),
     bookId: ObjectId("5653b6219ad6087723fa1cc6"),
-    approved: false
+    approved: 0
   },{
     _id: ObjectId("5653bcae9318d1da240a574b"),
     userId: ObjectId("5653a4efb2c7aa19102b5281"),
     bookId: ObjectId("5653b6219ad6087723fa1cc7"),
-    aapproved: true
+    aapproved: 1
   },{
     _id: ObjectId("5653bcae9318d1da240a574c"),
     userId: ObjectId("5653a4efb2c7aa19102b5281"),
     bookId: ObjectId("5653b6219ad6087723fa1cc8"),
-    approved: true
+    approved: 1
   }, function() {
       console.log('finished populating requests');
     }

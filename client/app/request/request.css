@@ -1,8 +1,10 @@
-.fa-times  {
-    font-size: 50%;
-    vertical-align: top;
-}
-
+/*
+	Choose action request buttons
+*/
 #action-button-group ul li {
     list-style: none;
+}
+
+#action-button-group button {
+    width: 90%;
 }

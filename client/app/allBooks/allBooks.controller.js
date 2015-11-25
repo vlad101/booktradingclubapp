@@ -25,7 +25,7 @@ angular.module('workspaceApp')
       var request = {
         bookId: bookId,
         userId: $scope.getCurrentUser()._id,
-        approved: false 
+        approved: 0 
       };
 
       $http.post('/api/requests', {request:request})
