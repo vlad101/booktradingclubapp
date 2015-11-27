@@ -21,7 +21,7 @@ exports.index = function(req, res) {
       bookIdList.push(ObjectId(requestInfoList[i].bookId));
 
     // Get all books where book _id matches book request bookId
-    Book.find( { _id : { $in : bookIdList } }, function (err, bookInfoList) {
+    Book.find( { _id : { $in : bookIdList }}, function (err, bookInfoList) {
       if(err) { return handleError(res, err); }
       if(!bookInfoList) { return res.status(404).send('Not Found'); }
 

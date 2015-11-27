@@ -5,7 +5,7 @@ var Book = require('./book.model');
 
 // Get list of books
 exports.index = function(req, res) {
-  Book.find(function (err, books) {
+  Book.find({valid: 1}, function (err, books) {
     if(err) { return handleError(res, err); }
     return res.status(200).json(books);
   });
@@ -13,7 +13,7 @@ exports.index = function(req, res) {
 
 // Get a single book
 exports.show = function(req, res) {
-  Book.findById(req.params.id, function (err, book) {
+  Book.find({_id: req.params.id, valid: 1}, function (err, book) {
     if(err) { return handleError(res, err); }
     if(!book) { return res.status(404).send('Not Found'); }
     return res.json(book);
@@ -32,7 +32,7 @@ exports.create = function(req, res) {
 // Updates an existing book in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  Book.findById(req.params.id, function (err, book) {
+  Book.find({_id: req.params.id, valid: 1}, function (err, book) {
     if (err) { return handleError(res, err); }
     if(!book) { return res.status(404).send('Not Found'); }
     var updated = _.merge(book, req.body);
@@ -48,10 +48,15 @@ exports.destroy = function(req, res) {
   Book.findById(req.params.id, function (err, book) {
     if(err) { return handleError(res, err); }
     if(!book) { return res.status(404).send('Not Found'); }
-    book.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.status(204).send('No Content');
+    book.valid = 0;
+    book.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.status(200).json(book);
     });
+    // book.remove(function(err) {
+    //   if(err) { return handleError(res, err); }
+    //   return res.status(204).send('No Content');
+    // });
   });
 };
 

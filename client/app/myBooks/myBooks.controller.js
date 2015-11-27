@@ -31,7 +31,8 @@ angular.module('workspaceApp')
       // Get form google book id
       var book = {
         userId: $scope.getCurrentUser()._id,
-        googleId: $scope.addBookForm.bookGoogleId
+        googleId: $scope.addBookForm.bookGoogleId,
+        valid: 1
       };
 
       // Do not add a book if a current user has a book

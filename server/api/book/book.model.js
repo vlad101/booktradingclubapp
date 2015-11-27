@@ -11,6 +11,7 @@ var BookSchema = new Schema({
   	title: String,
   	author: String,
   	googleId: String,
+  	valid: Number,
   	active: Boolean
 });
 

@@ -35,7 +35,13 @@
 		      		<li ng-show="request.approved == 0">
 		      			<div id="img_container">
 		      				<!-- Google book image uses google book API -->
-			    			<img ng-src="http<!-- ://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+			    			<img ng-show="bookRequestList[request._id].googleId" ng-src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+
+			    			<!-- Display deleted if book deleted -->
+			    			<div ng-show="bookRequestList[request._id].valid == 0">Deleted</div>
+
+			    			<!-- Trade book button -->
+			    			<a class="img_button" ng-click="deleteRequest(request._id)"><i class="fa fa-times"></i></a>
 
 			    			<!-- Trade book button -->
 			    			<a class="img_button" ng-click="deleteRequest(request._id)"><i class="fa fa-times"></i></a>
@@ -57,7 +63,7 @@
 		      			<div id="img_container">
 
 		      				<!-- Google book image uses google book API -->
-			    			<img ng-src="http<!-- ://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+			    			<img ng-show="bookRequestList[request._id].googleId" ng-src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
 
 			    			<!-- Trade book button -->
 			    			<a class="img_button" ng-click="deleteRequest(request._id)"><i class="fa fa-times"></i></a>
@@ -68,35 +74,74 @@
 		    	<div ng-show="yourRequestList.length == 0" id="book-list-empty"><h4>No book trade requested.<br></h4></div>
 	    	</div>
 	    </div>
-	    <br><br>
+	</div>
 
  	<!-- Requests for the user -->
 	<div class="row" ng-show="requestsForYou">
 	    <div class="col-lg-12">
 
-	      	<h2>Requests from other users<h2>
-	      	<h2>Requests you've approved<h2>
+      	<!-- User notifications -->
+      	<div ng-show="requestListMessage"><h4>{{ requestListMessage }}</h4></div>
+      	<div ng-show="deleteRequestMessage && requestList.length != 0"><h4>{{ deleteRequestMessage }}</h4></div>
+      	<div ng-show="deleteRequestMessage && requestList.length != 0"><h4>{{ updateRequestMessage }}</h4></div>
 
-		    <!-- Trade book message response -->
-		    <div ng-show="tradeBookMessage"><br><h4>{{ tradeBookMessage }}</h4></div>
+	    <div class="col-lg-12">
+
+ 	    	<!-- Allow update delete -->
+	      	<h2>Requests from other users<h2>
 
 	    	<div id="book-list">
-		      	<ul ng-repeat="book in bookList">
-		      		<li>
+		      	<ul ng-repeat="request in requestForYouList">
+		      		<!-- Show outstanding (not approved requests) -->
+		      		<li ng-show="request.approved == 0">
 		      			<div id="img_container">
-
 		      				<!-- Google book image uses google book API -->
-			    			<img ng-src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ book.googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+			    			<img ng-show="bookRequestList[request._id].googleId" ng-src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+			    			<img ng-show="!bookRequestList[request._id].googleId" ng-src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Book Deleted" src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
 
 			    			<!-- Trade book button -->
-			    			<a class="img_button" ng-click="tradeBook(book._id)"><i class="fa fa-times"></i></a>
+			    			<a class="img_button" ng-click="deleteRequest(request._id)"><i class="fa fa-times"></i></a>
+
+			    			<!-- POSSIBLE? 
+			    						    			<!-- Display deleted if book deleted
+			    			<div ng-show="bookRequestList[request._id].valid == 0">Deleted</div>
+
+			    			<!-- Trade book button 
+			    			<a class="img_button" ng-click="deleteRequest(request._id)"><i class="fa fa-times"></i></a>
+			    			<!-- Trade book button
+			    			<a class="img_button" ng-click="deleteRequest(request._id)"><i class="fa fa-times"></i></a>
+			    			-->
 
 			    		</div>
 		    		</li>
 		    	</ul>
-		    	<div ng-show="bookList.length == 0" id="book-list-empty">No books added.</div>
 	    	</div>
-	      </div>
+	    </div>
+	    <br><br>
+
+ 	    <div class="col-lg-12">
+ 	    	<!-- Allow delete only -->
+	      	<h2>Requests you've approved<h2>
+
+	    	<div id="book-list">
+		      	<ul ng-repeat="request in requestForYouList">
+		      		<!-- Show outstanding (not approved requests) -->
+		      		<li ng-show="request.approved == 1">
+		      			<div id="img_container">
+
+		      				<!-- Google book image uses google book API -->
+			    			<img ng-show="bookRequestList[request._id].googleId" ng-src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Effective Java" src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+			    			<img ng-show="!bookRequestList[request._id].googleId" ng-src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api" alt="Book Deleted" src="http://books.google.com/books/content?id={{ bookRequestList[request._id].googleId }}&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api">
+
+			    			<!-- Trade book button -->
+			    			<a class="img_button" ng-click="deleteRequest(request._id)"><i class="fa fa-times"></i></a>
+
+			    		</div>
+		    		</li>
+		    	</ul>
+		    	<div ng-show="yourRequestList.length == 0" id="book-list-empty"><h4>No book trade requested.<br></h4></div>
+	    	</div>
+	    </div>
   	</div>
 </div>
 

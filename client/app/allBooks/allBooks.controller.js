@@ -18,9 +18,17 @@ angular.module('workspaceApp')
     });
 
     // Trade button click event
-    $scope.tradeBook = function(bookId){
+    $scope.tradeBook = function(bookId, bookUserId){
 
       $scope.tradeBookMessage = '';
+
+      // Cannot trade user own book
+      for(var book in $scope.bookList) {
+      	if(bookUserId == $scope.getCurrentUser()._id) {
+          $scope.tradeBookMessage = "Cannot request your book.";
+          return;
+      	}
+      }
 
       var request = {
         bookId: bookId,
