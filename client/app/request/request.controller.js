@@ -43,22 +43,11 @@ angular.module('workspaceApp')
         for(var i in $scope.requestList) {
           for(var j in $scope.bookRequestList) {
             // requestInfoList book id must match with bookListInfo book id
-            console.log('1) ' + String($scope.requestList[i].bookId));
-            console.log('2) ' + String($scope.bookRequestList[j]._id));
-            console.log('3) ' + String($scope.bookRequestList[j].userId));
-            console.log('4) ' + $scope.getCurrentUser()._id);
             if(String($scope.requestList[i].bookId) == String($scope.bookRequestList[j]._id) && 
-                          String($scope.bookRequestList[j].userId) == $scope.getCurrentUser()._id) {
-              console.log("HI!!!");
+                          String($scope.bookRequestList[j].userId) == String($scope.getCurrentUser()._id)) {
               $scope.requestForYouList.push($scope.requestList[i]);
             }
           }
-        }
-
-        $scope.requestForYouList = [ ];
-        for(var i in $scope.requestList) {
-          if($scope.requestList[i].userId == $scope.getCurrentUser()._id)
-            $scope.requestForYouList.push($scope.requestList[i])
         }
 
         }, function errorCallback(response) {
@@ -68,6 +57,9 @@ angular.module('workspaceApp')
     });
 
     $scope.deleteRequest = function(requestId){
+
+      $scope.updateRequestMessage = '';
+      $scope.deleteRequestMessage = '';
 
     // Remove request from DB
       $http.delete('/api/requests/' + requestId)
@@ -79,7 +71,8 @@ angular.module('workspaceApp')
     	    		}
     	    	}
 
-            delete $scope.bookRequestList[requestId];
+            if($scope.bookRequestList.hasOwnProperty(requestId))
+              delete $scope.bookRequestList[requestId];
 
             $scope.deleteRequestMessage = "The trade request was deleted.";
           }, function errorCallback(response) {
@@ -89,6 +82,36 @@ angular.module('workspaceApp')
       });
     }
 
+    $scope.approveRequest = function(requestId, bookId){
+
+      $scope.updateRequestMessage = '';
+      $scope.deleteRequestMessage = '';
+
+
+      var request = {
+        _id: requestId,
+        bookId: bookId,
+        userId: $scope.isLoggedIn()._id,
+        approved: 1
+      };
+
+    // Remove request from DB
+      $http.put('/api/requests/' + requestId, {request:request})
+        .then(function successCallback(response) {
+
+            for(var i in $scope.requestForYouList) {
+                if($scope.requestForYouList[i]._id == requestId) {
+                  $scope.requestForYouList[i].approved = 1;
+                }
+            }
+
+            $scope.updateRequestMessage = "The trade request was updated.";
+          }, function errorCallback(response) {
+            $scope.updateRequestMessage = 'Something went wrong, try again.';
+      }).catch( function() {
+        $scope.updateRequestMessage = '';
+      });
+    }
     
     //Choose requests type
     $scope.chooseRequestType = function(actionId){

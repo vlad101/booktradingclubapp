@@ -31,11 +31,11 @@ exports.create = function(req, res) {
 
 // Updates an existing request in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
+  if(req.body.request._id) { delete req.body.request._id; }
   Request.findById(req.params.id, function (err, request) {
     if (err) { return handleError(res, err); }
     if(!request) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(request, req.body);
+    var updated = _.merge(request, req.body.request);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(request);

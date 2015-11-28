@@ -9,6 +9,29 @@
         <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
       </ul>
     </div> -->
+
+	<!-- If user logged in, choose action -->
+	<div id="action-button-group" ng-show="isLoggedIn()">
+		<h1 class="page-header">Main Page</h1><br>
+		<h2>Choose an action: </h2><br>
+		<ul>
+			<li>
+				<button ng-click="go('/allBooks')" class="btn btn-primary active">View All Books</button>
+			</li>
+			<br>
+			<li>
+				<button ng-click="go('/myBooks')" class="btn btn-primary active">View Your Books</button>
+			</li>
+			<br>
+			<li>
+				<button ng-click="go('/requests')" class="btn btn-primary active">View Requests</button>
+			</li>
+		</ul>
+	</div>
+
+	<div id="action-button-group" ng-show="!isLoggedIn()">
+		<h1 class="page-header">Welcome To A Book Trading Community! Register or Login.</h1>
+	</div>
   </div>
 </div>
 

@@ -8,3 +8,28 @@
 #action-button-group button {
     width: 90%;
 }
+
+/*
+    Approve Button inside image container
+*/
+ul li .img_button_approve {
+    text-align: center;
+    background: white;
+    color: red;
+    position: absolute;
+    font-size:60%;
+    color: green;
+    top: 3px;
+    right: 22px;
+    width: 17px;
+    height: 17px;
+    border-radius: 5px;
+}
+
+/*
+    Approve Button inside image on mouse over event
+*/
+ul li .img_button_approve:hover {
+    cursor: pointer;
+    background: #cccccc;
+}
