@@ -4,7 +4,7 @@
 <!-- Authenticated user -->
 <div ng-show="isLoggedIn()" class="container">
 
-	<h1 class="page-header">Your Trade Requests<h1>
+	<h1 class="page-header">Your Trade Requests</h1>
 	
 	<!-- Choose action - your requests or requests for you -->
 	<div id="action-button-group">
@@ -27,7 +27,7 @@
 	<!-- User requests -->
 	<div class="row" ng-show="yourRequests">
 
-	<div ng-show="yourRequestList.length == 0" id="book-list-empty"><h4><br>No book trade requested by you.<br></h4></div>
+		<div ng-show="yourRequestList.length == 0" id="book-list-empty"><h4><br>No book trade requested by you.<br></h4></div>
 
       	<div class="row">
 		    <div class="col-lg-12">
@@ -83,7 +83,7 @@
  	<!-- Requests for the user -->
 	<div class="row" ng-show="requestsForYou">
 
-	<div ng-show="requestForYouList.length == 0" id="book-list-empty"><h4><br>No book trade requested for you.<br></h4></div>
+		<div ng-show="requestForYouList.length == 0" id="book-list-empty"><h4><br>No book trade requested for you.<br></h4></div>
 
       	<div class="row">
 		    <div class="col-lg-12">
@@ -102,7 +102,7 @@
 				    			<!-- Trade book button -->
 				    			<a class="img_button" ng-click="deleteRequest(request._id)"><i class="fa fa-times fa"></i></a>
 				    						    			<!-- Approve trade request button -->
-				    			<a class="img_button_approve" ng-click="approveRequest(request._id, bookRequestList[request._id]._id)">&#10004;</i></a>
+				    			<a class="img_button_approve" ng-click="approveRequest(request._id, bookRequestList[request._id]._id)">&#10004;</a>
 
 				    			<!-- Display deleted if book deleted -->
 				    			<div ng-show="bookRequestList[request._id].valid == 0">Deleted</div>
