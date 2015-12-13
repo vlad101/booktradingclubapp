@@ -27,7 +27,7 @@
 	<!-- User requests -->
 	<div class="row" ng-show="yourRequests">
 
-		<div ng-show="yourRequestList.length == 0" id="book-list-empty"><h4><br>No book trade requested by you.<br></h4></div>
+		<!-- <div ng-show="yourRequestList.length == 0" id="book-list-empty"><h4><br>No book trade requested by you.<br></h4></div> -->
 
       	<div class="row">
 		    <div class="col-lg-12">
@@ -61,7 +61,7 @@
 		      	<h2>Your trade request was approved<h2>
 
 		    	<div id="book-list">
-			      	<ul ng-repeat="request in yourRequestList && bookRequestList[request._id].googleId">
+			      	<ul ng-repeat="request in yourRequestList">
 			      		<!-- Show outstanding (not approved requests) -->
 			      		<li ng-show="request.approved == 1">
 			      			<div id="img_container">
@@ -83,7 +83,7 @@
  	<!-- Requests for the user -->
 	<div class="row" ng-show="requestsForYou">
 
-		<div ng-show="requestForYouList.length == 0" id="book-list-empty"><h4><br>No book trade requested for you.<br></h4></div>
+		<!-- <div ng-show="requestForYouList.length == 0" id="book-list-empty"><h4><br>No book trade requested for you.<br></h4></div> -->
 
       	<div class="row">
 		    <div class="col-lg-12">

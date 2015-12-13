@@ -106,7 +106,7 @@ angular.module('workspaceApp')
                 }
             }
 
-            $scope.updateRequestMessage = "The trade request was updated.";
+            // $scope.updateRequestMessage = "The trade request was updated.";
           }, function errorCallback(response) {
             $scope.updateRequestMessage = 'Something went wrong, try again.';
       }).catch( function() {
