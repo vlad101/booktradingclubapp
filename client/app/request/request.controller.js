@@ -44,7 +44,8 @@ angular.module('workspaceApp')
           for(var j in $scope.bookRequestList) {
             // requestInfoList book id must match with bookListInfo book id
             if(String($scope.requestList[i].bookId) == String($scope.bookRequestList[j]._id) && 
-                          String($scope.bookRequestList[j].userId) == String($scope.getCurrentUser()._id)) {
+                          String($scope.bookRequestList[j].userId) == String($scope.getCurrentUser()._id) &&
+                          $scope.requestForYouList.indexOf($scope.requestList[i])  == -1) {
               $scope.requestForYouList.push($scope.requestList[i]);
             }
           }
